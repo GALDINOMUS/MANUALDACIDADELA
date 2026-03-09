@@ -1,0 +1,194 @@
+import { useState } from "react";
+
+export default function ManualCidadelaSite() {
+
+  const territorios = [
+    "Hospital",
+    "Mercado",
+    "Praça",
+    "Biblioteca",
+    "Sorveteria",
+    "Restaurante",
+    "Farmácia",
+    "Teatro",
+    "Corpo de Bombeiros",
+    "Estação de Trem",
+    "Salão de Beleza",
+    "Oficina de Carpintaria",
+    "Estúdio de Arte",
+    "Laboratório de Ciências",
+    "Correios",
+    "Consultório Dentário",
+    "Loja de Roupas",
+    "Zoológico",
+    "Estúdio Fotográfico",
+    "Jardim Botânico",
+  ];
+
+  const [territorioSelecionado, setTerritorioSelecionado] = useState(null);
+
+  function TerritorioPage({ nome }) {
+    return (
+      <div className="space-y-10">
+
+        <div>
+          <h2 className="text-3xl font-bold">{nome}</h2>
+          <p className="text-stone-600 mt-2">Território brincante da Cidadela.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+
+          <Bloco titulo="Faixa etária recomendada">
+            2 a 6 anos (ajustável conforme planejamento pedagógico).
+          </Bloco>
+
+          <Bloco titulo="Conceito pedagógico">
+            Este território permite explorar experiências sociais relacionadas a {nome.toLowerCase()}, permitindo que as crianças investiguem papéis sociais, relações e fenômenos presentes nesse ambiente.
+          </Bloco>
+
+          <Bloco titulo="Objetivos de aprendizagem">
+            <ul className="list-disc ml-5 space-y-1">
+              <li>Explorar papéis sociais</li>
+              <li>Desenvolver comunicação</li>
+              <li>Construir cooperação</li>
+              <li>Investigar fenômenos do cotidiano</li>
+            </ul>
+          </Bloco>
+
+          <Bloco titulo="Princípios e valores">
+            Cooperação, responsabilidade, curiosidade, respeito e inclusão.
+          </Bloco>
+
+          <Bloco titulo="Elementos sociais do território">
+            Espaços, objetos e personagens que caracterizam o ambiente de {nome.toLowerCase()}.
+          </Bloco>
+
+          <Bloco titulo="Recursos necessários">
+            Materiais simples, recicláveis e elementos que ajudem a recriar simbolicamente o ambiente.
+          </Bloco>
+
+          <Bloco titulo="Passo a passo de montagem">
+            Organização do espaço físico, construção de objetos e preparação do cenário de brincadeira simbólica.
+          </Bloco>
+
+          <Bloco titulo="Atividades investigativas">
+            Situações de brincadeira, exploração de papéis sociais e perguntas investigativas conduzidas pelo professor.
+          </Bloco>
+
+          <Bloco titulo="Avaliação">
+            Observação das interações, linguagem, cooperação, curiosidade e construção de hipóteses.
+          </Bloco>
+
+          <Bloco titulo="Possíveis passeios pedagógicos">
+            Visita a ambientes reais relacionados ao território para ampliar a experiência das crianças.
+          </Bloco>
+
+        </div>
+
+        <button
+          onClick={() => setTerritorioSelecionado(null)}
+          className="mt-6 px-6 py-3 bg-stone-900 text-white rounded-xl"
+        >
+          Voltar
+        </button>
+
+      </div>
+    );
+  }
+
+  function Bloco({ titulo, children }) {
+    return (
+      <div className="bg-white border border-stone-200 rounded-2xl p-6">
+        <h3 className="font-bold mb-2">{titulo}</h3>
+        <div className="text-sm text-stone-700 leading-relaxed">{children}</div>
+      </div>
+    );
+  }
+
+  if (territorioSelecionado) {
+    return (
+      <div className="min-h-screen bg-stone-50 p-10 max-w-6xl mx-auto">
+        <TerritorioPage nome={territorioSelecionado} />
+      </div>
+    );
+  }
+
+  return (
+
+    <div className="min-h-screen bg-stone-50">
+
+      <header className="border-b bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+
+          <div className="font-bold text-xl">
+            Manual da Cidadela
+          </div>
+
+          <nav className="text-sm text-stone-600">
+            Modelo pedagógico investigativo para Educação Infantil
+          </nav>
+
+        </div>
+      </header>
+
+
+      <section className="max-w-7xl mx-auto px-6 py-16">
+
+        <div className="max-w-3xl">
+
+          <h1 className="text-4xl font-bold">
+            Territórios Brincantes
+          </h1>
+
+          <p className="mt-4 text-stone-600 text-lg">
+            Cada território funciona como um projeto pedagógico estruturado. Todos seguem o mesmo esqueleto metodológico, variando apenas conforme as características do ambiente social explorado.
+          </p>
+
+        </div>
+
+
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
+
+          {territorios.map((t, i) => (
+
+            <button
+              key={t}
+              onClick={() => setTerritorioSelecionado(t)}
+              className="bg-white border border-stone-200 rounded-xl p-4 text-left hover:shadow-md"
+            >
+
+              <div className="text-emerald-700 font-semibold text-sm">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+
+              <div className="font-semibold">
+                {t}
+              </div>
+
+              <div className="text-xs text-stone-500 mt-1">
+                Abrir território
+              </div>
+
+            </button>
+
+          ))}
+
+        </div>
+
+
+      </section>
+
+
+      <footer className="border-t bg-white">
+
+        <div className="max-w-7xl mx-auto px-6 py-8 text-sm text-stone-500">
+          Manual da Cidadela • Modelo pedagógico baseado nas concepções prévias das crianças
+        </div>
+
+      </footer>
+
+
+    </div>
+
+  );
+}
